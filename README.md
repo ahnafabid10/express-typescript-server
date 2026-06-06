@@ -1,74 +1,104 @@
 # Express TypeScript Server
 
-A simple Express server written in TypeScript with PostgreSQL integration using `pg`.
+A production-ready Express server built with TypeScript and PostgreSQL. This project provides a RESTful API for user management with automatic database initialization.
 
-## Project Structure
+## 🚀 Features
 
-- `src/server.ts` - main Express application entry point.
-- `package.json` - npm scripts and dependencies.
-- `tsconfig.json` - TypeScript configuration.
+- ✅ **Express.js** - Fast and minimal web framework
+- ✅ **TypeScript** - Type-safe development
+- ✅ **PostgreSQL** - Robust relational database
+- ✅ **Auto DB Initialization** - Creates tables on startup
+- ✅ **Request Parsing** - JSON, text, and URL-encoded support
+- ✅ **Hot Reload** - Development server with automatic restart
 
-## Features
+## 📋 Prerequisites
 
-- Express-based API server
-- PostgreSQL connection using `pg`
-- JSON, text, and URL-encoded request body parsing
-- `users` table initialization on startup
-- Basic POST route for creating users
+- **Node.js** 18+ (LTS recommended)
+- **npm** 8+ or **yarn**
+- **PostgreSQL** 12+ (running locally or accessible remotely)
 
-## Requirements
+## 📁 Project Structure
 
-- Node.js 18+ (recommended)
-- npm
-- PostgreSQL database
+```
+├── src/
+│   ├── server.ts          # Main Express application entry point
+│   └── config/
+│       └── index.ts       # Environment configuration
+├── package.json           # Dependencies and scripts
+├── tsconfig.json          # TypeScript configuration
+└── README.md              # This file
+```
 
-## Installation
+## 🔧 Installation & Setup
 
-1. Install dependencies:
+### 1. Clone and Install Dependencies
 
 ```bash
+git clone <repository-url>
+cd express
 npm install
 ```
 
-## Running Locally
+### 2. Configure Environment
 
-Start the development server:
+Create a `.env` file in the project root:
+
+```env
+# Database Configuration
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=your_password
+DB_NAME=express_db
+
+# Server Configuration
+PORT=5000
+NODE_ENV=development
+```
+
+### 3. Running the Server
+
+**Development mode** (with hot reload):
 
 ```bash
 npm run dev
 ```
 
-The server listens on port `5000` by default.
+The server will start on `http://localhost:5000`
 
-## API Endpoints
+## 📚 API Documentation
 
-### GET `/`
+### Health Check
 
-Returns a basic JSON response:
+**GET** `/`
+
+Returns server status:
 
 ```json
 {
-  "massage": "Express Server",
+  "message": "Express Server",
   "author": "Next Level"
 }
 ```
 
-### POST `/api/users`
+### Create User
+
+**POST** `/api/users`
 
 Create a new user record.
 
-Request body example:
+**Request Body:**
 
 ```json
 {
   "name": "John Doe",
   "email": "john@example.com",
-  "password": "s3cret",
+  "password": "secure_password",
   "age": 30
 }
 ```
 
-Successful response:
+**Success Response (201):**
 
 ```json
 {
@@ -77,27 +107,67 @@ Successful response:
     "id": 1,
     "name": "John Doe",
     "email": "john@example.com",
-    "password": "s3cret",
+    "password": "secure_password",
     "age": 30,
     "is_active": true,
-    "create_at": "2026-06-02T...",
-    "updated_at": "2026-06-02T..."
+    "created_at": "2026-06-06T10:30:00.000Z",
+    "updated_at": "2026-06-06T10:30:00.000Z"
   }
 }
 ```
 
-## Database
+## 🗄️ Database Schema
 
-The app currently initializes a `users` table automatically when it starts.
+The application automatically creates a `users` table on startup with the following columns:
 
-Table columns:
+| Column | Type | Constraints |
+|--------|------|-------------|
+| `id` | SERIAL | PRIMARY KEY |
+| `name` | VARCHAR(20) | - |
+| `email` | VARCHAR(20) | UNIQUE, NOT NULL |
+| `password` | VARCHAR(20) | NOT NULL |
+| `age` | INT | - |
+| `is_active` | BOOLEAN | DEFAULT true |
+| `created_at` | TIMESTAMP | DEFAULT NOW() |
+| `updated_at` | TIMESTAMP | DEFAULT NOW() |
 
-- `id` - primary key
-- `name`
-- `email` - unique, required
-- `password` - required
-- `is_active` - boolean, defaults to true
-- `age`
+## 🛠️ Technologies Used
+
+- **express** ^5.2.1 - Web framework
+- **pg** ^8.21.0 - PostgreSQL client
+- **typescript** ^6.0.3 - TypeScript compiler
+- **tsx** ^4.22.3 - TypeScript executor for Node.js
+- **dotenv** ^17.4.2 - Environment variable management
+
+## 📝 Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server with hot reload |
+| `npm test` | Run tests (not configured) |
+
+## 🔐 Security Notes
+
+- Store sensitive data (passwords, database credentials) in `.env` file
+- Never commit `.env` file to version control
+- Use environment variables for all configuration
+- Consider hashing passwords before storing in database
+- Validate and sanitize all user inputs
+
+## 🤝 Contributing
+
+1. Create a feature branch (`git checkout -b feature/new-feature`)
+2. Commit changes (`git commit -m 'Add new feature'`)
+3. Push to branch (`git push origin feature/new-feature`)
+4. Open a Pull Request
+
+## 📄 License
+
+ISC
+
+## 👨‍💻 Author
+
+Next Level
 - `create_at` - timestamp default now
 - `updated_at` - timestamp default now
 
