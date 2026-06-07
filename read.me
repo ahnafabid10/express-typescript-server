@@ -1,0 +1,114 @@
+Express TypeScript Server
+========================
+
+A production-ready Express server built with TypeScript and PostgreSQL. This project provides a RESTful API for user management with automatic database initialization.
+
+Features
+--------
+
+- Express.js web framework
+- TypeScript for type-safe development
+- PostgreSQL database support
+- Auto database initialization on startup
+- JSON, text, and URL-encoded request parsing
+- Development hot reload support
+
+Prerequisites
+-------------
+
+- Node.js 18+ (LTS recommended)
+- npm 8+ or yarn
+- PostgreSQL 12+ running locally or accessible remotely
+
+Project Structure
+-----------------
+
+- `src/` - Application source code
+- `src/server.ts` - Main Express app entry point
+- `src/config/` - Configuration and environment settings
+- `src/modules/user/` - User module controllers, services, routes, and types
+- `package.json` - Project metadata, dependencies, and scripts
+- `tsconfig.json` - TypeScript compiler configuration
+- `README.md` - Existing project README
+- `read.me` - This file
+
+Installation & Setup
+--------------------
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+cd express-typescript-server
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Create a `.env` file in the project root with database and server settings:
+
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=your_password
+DB_NAME=express_db
+PORT=5000
+NODE_ENV=development
+```
+
+Running the Server
+------------------
+
+Start the development server with hot reload:
+
+```bash
+npm run dev
+```
+
+The server should be available at `http://localhost:5000`.
+
+API Overview
+------------
+
+- `GET /` - Health check endpoint
+- `POST /api/users` - Create a new user
+
+Example user payload:
+
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "secure_password",
+  "age": 30
+}
+```
+
+Database Schema
+---------------
+
+The application creates a `users` table on startup with columns such as:
+
+- `id`
+- `name`
+- `email`
+- `password`
+- `age`
+- `is_active`
+- `created_at`
+- `updated_at`
+
+Notes
+-----
+
+- Keep sensitive credentials out of version control by using a `.env` file.
+- For production, move all database and secret configuration into environment variables and use secure password hashing.
+
+License
+-------
+
+ISC
