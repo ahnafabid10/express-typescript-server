@@ -7,7 +7,8 @@ import config from "../../config";
 const loginUserIntoDb  =async(payload : {
     email :string; 
     password: string;
-})=>{
+    })=>{
+        
     const{ email, password} = payload
 
     const userData = await pool.query(`
