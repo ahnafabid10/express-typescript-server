@@ -11,7 +11,16 @@ A production-ready Express server built with TypeScript and PostgreSQL. This pro
 - ✅ **Request Parsing** - JSON, text, and URL-encoded support
 - ✅ **Hot Reload** - Development server with automatic restart
 
-## 📋 Prerequisites
+## �️ Implemented Work
+
+- Modular routing for `auth`, `profile`, and `user` features
+- `src/app.ts` sets up middleware and routes
+- `src/server.ts` initializes the database and starts the server
+- `src/config/index.ts` loads environment configuration from `.env`
+- `src/db/index.ts` creates `users` and `profiles` tables automatically
+- Built REST API endpoints under `/api/users`, `/api/profile`, and `/api/auth`
+
+## �📋 Prerequisites
 
 - **Node.js** 18+ (LTS recommended)
 - **npm** 8+ or **yarn**
@@ -173,8 +182,8 @@ Next Level
 
 ## Notes
 
-- The database connection string is currently hard-coded in `src/server.ts`.
-- For production use, move the database credentials into environment variables.
+- The database connection string is loaded from `.env` via `src/config/index.ts`.
+- For production use, keep all database credentials and secrets in environment variables.
 
 ## License
 
