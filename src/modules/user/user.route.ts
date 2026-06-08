@@ -6,13 +6,13 @@ const router = Router()
 
 router.post("/", userController.createUser)
 
-router.get(("/api/users"), userController.getAllUsers)
+router.get(("/"), userController.getAllUsers)
 
-router.get('/api/users/:id', userController.getSingleUser)
+router.get('/:id', userController.getSingleUser)
 
-router.put('/api/users/:id', userController.updateUser)
+router.put('/:id', userController.updateUser)
 
-router.delete("/api/users/:id", userController.deleteUser )
+router.delete("/:id", userController.deleteUser )
 
 
 export const userRouter  =router
