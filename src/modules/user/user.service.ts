@@ -15,6 +15,8 @@ const createUserIntoDb = async(payload : IUser) =>{
         `, [name, email, hashPassword, age],
     )
 
+        delete result.rows[0].password
+
         console.log(result)
         return result;
 }
