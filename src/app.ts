@@ -3,6 +3,7 @@ import {Pool} from "pg"
 import config from "./config"
 import { initDB, pool } from "./db"
 import { userRouter } from "./modules/user/user.route"
+import { profileRoutes } from "./modules/profile/profile.route"
 const app : Application = express()
 
 app.use(express.json())
@@ -18,6 +19,7 @@ res.status(200).json({
 })
 
 app.use('/api/users', userRouter)
+app.use('/api/profile', profileRoutes)
 
 
 export default app
