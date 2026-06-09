@@ -8,7 +8,34 @@ const loginUser = async(req: Request, res: Response)=>{
 
         const {refreshToken} = result
 
-        res.cookie("refreshToken", refreshToken{
+        res.cookie("refreshToken", refreshToken,{
+          secure: false, // in prod true
+          httpOnly: true,
+          sameSite: "lax"
+        })
+
+        res.status(201).json({
+      success: true,
+      message: "Profile created successfully!",
+      data: result,
+    });
+    } catch (error : any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      error: error,
+    });
+    }
+}
+
+const refreshToken =async(req: Request, res: Response)=>{
+  try {
+
+        const result = await authservice.generateRefreshToken(req.cookies.refreshToken)
+
+        // const {refreshToken} = result
+
+        res.cookie("refreshToken", refreshToken,{
           secure: false, // in prod true
           httpOnly: true,
           sameSite: "lax"
@@ -29,5 +56,6 @@ const loginUser = async(req: Request, res: Response)=>{
 }
 
 export const authController = {
-    loginUser
+    loginUser,
+    refreshToken
 }
