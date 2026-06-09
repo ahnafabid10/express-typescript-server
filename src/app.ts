@@ -6,6 +6,7 @@ import { userRouter } from "./modules/user/user.route"
 import { profileRoutes } from "./modules/profile/profile.route"
 import { authRouter } from "./modules/auth/auth.route"
 import fs from "fs"
+import logger from "./middleware/logger"
 
 const app : Application = express()
 
@@ -13,14 +14,7 @@ app.use(express.json())
 app.use(express.text())
 app.use(express.urlencoded({extended: true}))
 
-app.use((req, res, next) => {
-  console.log('Method - URL - Time:', req.method, req.url, Date.now());
-  const log = `Method -> ${req.method} URL -> ${req.url} Time -> ${new Date()}\n`;
-  fs.appendFile(`logger txt`, log,(err)=>{
-    console.log(err)
-  })
-  next();
-});
+app.use(logger);
 
 app.get('/', (req : Request, res : Response) => {
 //   res.send('Hello World!')
