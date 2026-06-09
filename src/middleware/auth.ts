@@ -15,10 +15,9 @@ const auth =() =>{
       data: {},
     });
     }
-    // console.log("fdgfgfgfgfGF",config.secret)
-    // const decoded = jwt.verify(token as string, config.secret as string)
+    const decoded = jwt.verify(token as string, config.secret as string)
 
-    // console.log(decoded)
+    console.log(decoded)
 
     next()
     }  
