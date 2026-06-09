@@ -6,6 +6,14 @@ const loginUser = async(req: Request, res: Response)=>{
 
         const result = await authservice.loginUserIntoDb(req.body)
 
+        const {refreshToken} = result
+
+        res.cookie("refreshToken", refreshToken{
+          secure: false, // in prod true
+          httpOnly: true,
+          sameSite: "lax"
+        })
+
         res.status(201).json({
       success: true,
       message: "Profile created successfully!",
