@@ -1,5 +1,6 @@
 import type { Request, Response } from "express"
 import { authservice } from "./auth.service";
+import sendResponse from "../../utility/sendResponse";
 
 const loginUser = async(req: Request, res: Response)=>{
     try {
@@ -14,17 +15,22 @@ const loginUser = async(req: Request, res: Response)=>{
           sameSite: "lax"
         })
 
-        res.status(201).json({
+        // res.status(201).json();
+
+    sendResponse(res, {
+      statusCode: 201,
       success: true,
       message: "Profile created successfully!",
       data: result,
-    });
+    })
+
     } catch (error : any) {
-    res.status(500).json({
+      sendResponse(res,{
+      statusCode: 500,
       success: false,
       message: error.message,
       error: error,
-    });
+    })
     }
 }
 
